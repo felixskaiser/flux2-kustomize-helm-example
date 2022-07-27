@@ -17,16 +17,13 @@ jobs:
         with:
           path: current_branch
 
-      - run: |
-          pwd
-          ls -l
-          echo "main_branch"
-          ls -l main_branch
-          echo "current_branch"
-          ls -l current_branch
-
       - id: diff_flux_kustomizations
         uses: felixskaiser/flux-diff-action@fix-action-path
         with:
           src_path: main_branch
           dst_path: current_branch
+          output_format: markdown
+
+      # Use single quotes ('') to prevent command substitution because of backticks (```)
+      - name: Add to job summary
+        run: echo '${{ steps.diff_flux_kustomizations.outputs.diff }}' >> "$GITHUB_STEP_SUMMARY"
