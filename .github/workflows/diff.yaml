@@ -18,10 +18,7 @@ jobs:
           dst_path: clusters/staging
 
       - name: Output
-        run: |
-          cat << EOF >> $GITHUB_STEP_SUMMARY
-          ${{ steps.diff_flux_kustomizations.outputs.diff }}
-          EOF
+        run: echo "${{ steps.diff_flux_kustomizations.outputs.diff }}"
 
   pr_comment:
     runs-on: ubuntu-latest
