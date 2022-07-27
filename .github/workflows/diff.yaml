@@ -1,6 +1,8 @@
 name: Flux Kustomize Diff
 
-on: pull_request
+on:
+  pull_request:
+    branches: [main]
 
 jobs:
   diff-flux-kustomizations:
@@ -23,6 +25,7 @@ jobs:
           src_path: base_branch
           dst_path: current_branch
           output_type: pr_comment
+          output_format: markdown
 
       - name: Output
         run: |
