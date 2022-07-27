@@ -6,11 +6,11 @@ jobs:
   diff-flux-kustomizations:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout default branch
+      - name: Checkout base branch
         uses: actions/checkout@v3
         with:
-          ref: main
-          path: main_branch
+          ref: ${{ github.base_ref }}
+          path: base_branch
 
       - name: Checkout current branch
         uses: actions/checkout@v3
@@ -20,12 +20,6 @@ jobs:
       - id: diff_flux_kustomizations
         uses: felixskaiser/flux-diff-action@fix-action-path
         with:
-          src_path: main_branch
+          src_path: base_branch
           dst_path: current_branch
-          output_format: markdown
-
-      - name: Output
-        run: |
-          cat << EOF >> $GITHUB_STEP_SUMMARY
-          ${{ steps.diff_flux_kustomizations.outputs.diff }}
-          EOF
+          output_type: pr_comment
