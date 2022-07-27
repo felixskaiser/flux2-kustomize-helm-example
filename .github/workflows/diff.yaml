@@ -26,4 +26,4 @@ jobs:
 
       # Use single quotes ('') to prevent command substitution because of backticks (```)
       - name: Add to job summary
-        run: printf "%s" ${{ steps.diff_flux_kustomizations.outputs.diff }} >> "$GITHUB_STEP_SUMMARY"
+        run: printf "%s" "${{ steps.diff_flux_kustomizations.outputs.diff }}" >> "$GITHUB_STEP_SUMMARY"
