@@ -22,6 +22,7 @@ jobs:
         with:
           src_path: main_branch
           dst_path: current_branch
+          output_format: markdown
 
       - name: Output
         run: echo '${{ steps.diff_flux_kustomizations.outputs.diff }}'
