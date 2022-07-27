@@ -17,6 +17,9 @@ jobs:
           src_path: clusters/production
           dst_path: clusters/staging
 
+      - name: Output
+        run: echo '${{ steps.diff_flux_kustomizations.outputs.diff }}'
+
   pr_comment:
     runs-on: ubuntu-latest
     steps:
