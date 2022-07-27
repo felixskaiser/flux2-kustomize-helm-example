@@ -22,8 +22,7 @@ jobs:
         with:
           src_path: main_branch
           dst_path: current_branch
-          output_format: markdown
 
       # Use single quotes ('') to prevent command substitution because of backticks (```)
       - name: Add to job summary
-        run: printf "%s" "${{ steps.diff_flux_kustomizations.outputs.diff }}" >> "$GITHUB_STEP_SUMMARY"
+        run: printf "\`\`\`diff\n%s\n\`\`\`\n" ${{ steps.diff_flux_kustomizations.outputs.diff }} >> "$GITHUB_STEP_SUMMARY"
