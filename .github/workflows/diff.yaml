@@ -5,6 +5,15 @@ on:
     branches: [main]
 
 jobs:
+  compare_dirs:
+    runs-on: ubuntu-latest
+    steps:
+      - id: diff_flux_kustomizations
+        uses: felixskaiser/flux-diff-action@fix-action-path
+        with:
+          src_path: clusters/production
+          dst_path: clusters/staging
+
   pr_comment:
     runs-on: ubuntu-latest
     steps:
