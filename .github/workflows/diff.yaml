@@ -1,0 +1,32 @@
+name: Flux Kustomize Diff
+
+on: push
+
+jobs:
+  diff-flux-kustomizations:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout default branch
+        uses: actions/checkout@v3
+        with:
+          ref: main
+          path: main_branch
+
+      - name: Checkout current branch
+        uses: actions/checkout@v3
+        with:
+          path: current_branch
+
+      - run: |
+          pwd
+          ls -l
+          echo "main_branch"
+          ls -l main_branch
+          echo "current_branch"
+          ls -l current_branch
+
+      - id: diff_flux_kustomizations
+        uses: felixskaiser/flux-diff-action@fix-action-path
+        with:
+          src_path: main_branch
+          dst_path: current_branch
